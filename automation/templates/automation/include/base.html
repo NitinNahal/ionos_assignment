@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{# Load the tag library #}
+{% csrf_token %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CREATE</title>
+    <!-- Bootstrap Core CSS -->
+    <link type="text/css" href="{% static 'activity_logger/css/classLoader.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'activity_logger/css/fontawesome-webfont.woff' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'activity_logger/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'activity_logger/css/bootstrap-datetimepicker.min.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'activity_logger/css/bootstrap-multiselect.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'activity_logger/css/simple-line-icons.css' %}" />
+
+    <!-- Menu CSS -->
+    <link href="{% static 'activity_logger/css/sidebar-nav.min.css' %}" rel="stylesheet">
+    <!-- morris CSS -->
+    <link href="{% static 'activity_logger/css/morris.css' %}" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="{% static 'activity_logger/css/animate.css' %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link type="text/css" href="{% static 'activity_logger/css/style_CUSTOM.css' %}" rel="stylesheet">
+	<link type="text/css" href="{% static 'activity_logger/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'activity_logger/css/buttons.dataTables.min.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'activity_logger/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'activity_logger/css/fixedColumns.dataTables.min.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'activity_logger/css/font-awesome.min.css' %}" />
+    <!-- Custom CSS -->
+    <link href="{% static 'activity_logger/css/blue-dark.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'activity_logger/css/bootstrap.fd.css' %}" />    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="{% static 'activity_logger/js/html5shiv.js' %}"></script>
+    <script src="{% static 'activity_logger/js/respond.min.js' %}"></script>
+    <![endif]-->
+<style>
+.input-file-container {
+  position: relative;
+  width: 225px;
+}
+.input-file-trigger {
+  display: block;
+  padding: 14px 45px;
+  background: #85b4d0;
+  color: #fff;
+  font-size: 1em;
+  transition: all .4s;
+  cursor: pointer;
+}
+.input-file {
+  position: relative;
+  top: 0; left: 0;
+  width: 225px;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer;
+}
+.input-file:hover + .input-file-trigger,
+.input-file:focus + .input-file-trigger,
+.input-file-trigger:hover,
+.input-file-trigger:focus {
+  background: #397293;
+  color: #fff;
+}
+
+.file-return {
+  margin: 0;
+}
+.file-return:not(:empty) {
+  margin: 1em 0;
+}
+.file-return {
+  font-style: italic;
+  font-size: .9em;
+  font-weight: bold;
+}
+.file-return:not(:empty):before {
+  content: "Selected file: ";
+  font-style: normal;
+  font-weight: normal;
+}
+</style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="cssload-speeding-wheel"></div>
+    </div>
+    <div id="wrapper">
+    
+      <nav class="navbar navbar-default navbar-static-top m-b-0">
+        <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)"
+            data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></a>
+          <div class="top-left-part"></div>
+          <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
+            <li>
+              <a class="profile-pic" href="{% url 'activity_logger:login' %}"><span class="glyphicon glyphicon-home"
+                  style="font-size:15px;margin-right:5px"></span><b class="hidden-xs" style="font-size:150%">CREATE</b></a>
+            </li>
+          </ul>
+          <ul class="nav navbar-top-links navbar-right pull-right">
+            <li>
+              <a id="userlogout" class="profile-pic" href="{% url 'activity_logger:logout' %}" ><span class="glyphicon glyphicon-log-out"
+                  style="font-size:15px;margin-right:5px"></span><b class="hidden-xs">{{ user__name }}, Logout</b> </a>
+            </li> 
+            <li>
+              <a class="profile-pic" href="" id="setting" data-toggle="modal" data-target="#setting-modal"><span style="font-size:20px;" class="glyphicon glyphicon-menu-hamburger"></span></a>
+            </li>            
+          </ul>
+          <ul class="nav navbar-top-links" style="margin-left:30px">
+            <center>
+              <li>
+                <div style="text-align:center;padding:5px;float:center;width:100%;">
+                  <h3 style="color:white;font-family:Verdana;"><b>Welcome {{first_name}}</b></h3>
+                </div>
+              </li>
+            </center>
+          </ul>
+        </div>
+      </nav>
+
+{% block content %}
+{% endblock %}
+    </div>
+        <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="{% static 'activity_logger/js/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'activity_logger/js/bootstrap.min.js' %}"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="{% static 'activity_logger/js/sidebar-nav.min.js' %}"></script>
+    <!--slimscroll JavaScript -->
+    <script src="{% static 'activity_logger/js/jquery.slimscroll.js' %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static 'activity_logger/js/waves.js' %}"></script>
+    <!--Counter js -->
+    <script src="{% static 'activity_logger/js/jquery.waypoints.js' %}"></script>
+    <script src="{% static 'activity_logger/js/jquery.counterup.min.js' %}"></script>
+    <!--Morris JavaScript -->
+    <script src="{% static 'activity_logger/js/raphael-min.js' %}"></script>
+    <script src="{% static 'activity_logger/js/morris.js' %}"></script>
+
+    <!-- Custom Theme JavaScript -->
+
+    <script src="{% static 'activity_logger/js/custom.min.js' %}"></script>
+    <script src="{% static 'activity_logger/js/dashboard1.js' %}"></script>
+	<script src="{% static 'activity_logger/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'activity_logger/js/buttons.flash.min.js' %}"></script>
+    <script src="{% static 'activity_logger/js/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'activity_logger/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'activity_logger/js/dataTables.bootstrap.min.js' %}"></script>
+    <script src="{% static 'activity_logger/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'activity_logger/js/dataTables.fixedColumns.min.js' %}"></script>
+    <script src="{% static 'activity_logger/js/gijgo.min.js' %}"></script>
+    <script src="{% static 'activity_logger/js/bootstrap-multiselect.js' %}"></script>
+    <script src="{% static 'activity_logger/js/buttons.colVis.min.js' %}"></script>
+    <!--<script src="{% static 'activity_logger/js/dataTables.fixedHeader1.min.js' %}"></script>-->
+
+    <script src="{% static 'activity_logger/js/moment-with-locales.js' %}">
+    <script src="{% static 'activity_logger/js/moment.js' %}"></script>
+    <script src="{% static 'activity_logger/js/bootstrap-datetimepicker.min.js' %}"></script>
+    <script src="{% static 'activity_logger/js/vfs_fonts.js' %}"></script>
+    <script src="{% static 'activity_logger/js/pdfmake.min.js' %}"></script>
+    <script src="{% static 'activity_logger/js/jszip.min.js' %}"></script>
+    <script src="{% static 'activity_logger/js/app.js' %}"></script>
+    <script src="{% static 'activity_logger/js/jquery.classyloader.js' %}"></script>
+    <script src="{% static 'activity_logger/js/jquery.classyloader.min.js' %}"></script>
+    <script src="{% static 'activity_logger/js/bootstrap.fd.js' %}"></script>
+    <script type="text/javascript">
+    </script>
+{% block jquery %}
+{% endblock %}
+</body>
+</html>
