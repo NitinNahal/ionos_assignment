@@ -1,0 +1,122 @@
+2022-02-10 02:30:55,732 p=117489 u=root n=ansible | PLAY [trigger_DB] ******************************************************************
+2022-02-10 02:30:55,743 p=117489 u=root n=ansible | TASK [Gathering Facts] *************************************************************
+2022-02-10 02:30:57,614 p=117489 u=root n=ansible | ok: [DB]
+2022-02-10 02:30:57,619 p=117489 u=root n=ansible | TASK [Installing Mysql  and dependencies] ******************************************
+2022-02-10 02:31:03,829 p=117489 u=root n=ansible | changed: [DB] => (item=python3-setuptools)
+2022-02-10 02:31:26,863 p=117489 u=root n=ansible | changed: [DB] => (item=python3-pip)
+2022-02-10 02:31:29,080 p=117489 u=root n=ansible | changed: [DB] => (item=python3-pymysql)
+2022-02-10 02:31:31,364 p=117489 u=root n=ansible | changed: [DB] => (item=python3-mysqldb)
+2022-02-10 02:31:54,036 p=117489 u=root n=ansible | changed: [DB] => (item=mysql-server)
+2022-02-10 02:31:56,037 p=117489 u=root n=ansible | changed: [DB] => (item=mysql-client)
+2022-02-10 02:31:58,324 p=117489 u=root n=ansible | changed: [DB] => (item=default-libmysqlclient-dev)
+2022-02-10 02:31:58,339 p=117489 u=root n=ansible | TASK [Check if this old version is absent PyMySQL] *********************************
+2022-02-10 02:31:59,841 p=117489 u=root n=ansible | ok: [DB]
+2022-02-10 02:31:59,846 p=117489 u=root n=ansible | TASK [Enable remote login to mysql] ************************************************
+2022-02-10 02:32:00,220 p=117489 u=root n=ansible | changed: [DB]
+2022-02-10 02:32:00,225 p=117489 u=root n=ansible | TASK [Change the authentication plugin of MySQL root user to mysql_native_password] ***
+2022-02-10 02:32:00,603 p=117489 u=root n=ansible | changed: [DB]
+2022-02-10 02:32:00,608 p=117489 u=root n=ansible | TASK [Flush Privileges] ************************************************************
+2022-02-10 02:32:00,880 p=117489 u=root n=ansible | changed: [DB]
+2022-02-10 02:32:00,885 p=117489 u=root n=ansible | TASK [Create user with password, all database privileges and 'WITH GRANT OPTION'] ***
+2022-02-10 02:32:01,399 p=117489 u=root n=ansible | changed: [DB]
+2022-02-10 02:32:01,404 p=117489 u=root n=ansible | TASK [Flush Privileges] ************************************************************
+2022-02-10 02:32:01,673 p=117489 u=root n=ansible | changed: [DB]
+2022-02-10 02:32:01,678 p=117489 u=root n=ansible | TASK [Restart mysql] ***************************************************************
+2022-02-10 02:32:05,217 p=117489 u=root n=ansible | changed: [DB]
+2022-02-10 02:32:05,221 p=117489 u=root n=ansible | TASK [Create DB] *******************************************************************
+2022-02-10 02:32:05,596 p=117489 u=root n=ansible | changed: [DB]
+2022-02-10 02:32:05,597 p=117489 u=root n=ansible | RUNNING HANDLER [Restart mysql] ****************************************************
+2022-02-10 02:32:09,757 p=117489 u=root n=ansible | changed: [DB]
+2022-02-10 02:32:09,759 p=117489 u=root n=ansible | PLAY RECAP *************************************************************************
+2022-02-10 02:32:09,759 p=117489 u=root n=ansible | DB                         : ok=11   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2022-02-10 02:32:19,688 p=117763 u=root n=ansible | PLAY [trigger_WEB] *****************************************************************
+2022-02-10 02:32:19,697 p=117763 u=root n=ansible | TASK [Gathering Facts] *************************************************************
+2022-02-10 02:32:22,956 p=117763 u=root n=ansible | ok: [WEB]
+2022-02-10 02:32:22,961 p=117763 u=root n=ansible | TASK [Installing  packages and dependencies] ***************************************
+2022-02-10 02:32:31,445 p=117763 u=root n=ansible | changed: [WEB] => (item=python3-setuptools)
+2022-02-10 02:32:51,047 p=117763 u=root n=ansible | changed: [WEB] => (item=python3-pip)
+2022-02-10 02:32:53,007 p=117763 u=root n=ansible | changed: [WEB] => (item=python3-mysqldb)
+2022-02-10 02:33:13,316 p=117763 u=root n=ansible | changed: [WEB] => (item=mysql-server)
+2022-02-10 02:33:14,993 p=117763 u=root n=ansible | changed: [WEB] => (item=mysql-client)
+2022-02-10 02:33:17,140 p=117763 u=root n=ansible | changed: [WEB] => (item=default-libmysqlclient-dev)
+2022-02-10 02:33:20,191 p=117763 u=root n=ansible | changed: [WEB] => (item=supervisor)
+2022-02-10 02:33:23,578 p=117763 u=root n=ansible | changed: [WEB] => (item=git)
+2022-02-10 02:33:23,595 p=117763 u=root n=ansible | TASK [Install Packages related to WEB] *********************************************
+2022-02-10 02:33:31,758 p=117763 u=root n=ansible | changed: [WEB]
+2022-02-10 02:33:31,763 p=117763 u=root n=ansible | TASK [Download the code from the GitRepo] ******************************************
+2022-02-10 02:33:33,276 p=117763 u=root n=ansible | changed: [WEB]
+2022-02-10 02:33:33,281 p=117763 u=root n=ansible | TASK [Enable DB] *******************************************************************
+2022-02-10 02:33:33,621 p=117763 u=root n=ansible | changed: [WEB]
+2022-02-10 02:33:33,626 p=117763 u=root n=ansible | TASK [Make DB tables] **************************************************************
+2022-02-10 02:33:34,565 p=117763 u=root n=ansible | changed: [WEB]
+2022-02-10 02:33:34,570 p=117763 u=root n=ansible | TASK [Align DB with Web application] ***********************************************
+2022-02-10 02:33:36,029 p=117763 u=root n=ansible | changed: [WEB]
+2022-02-10 02:33:36,034 p=117763 u=root n=ansible | TASK [Creating a config file] ******************************************************
+2022-02-10 02:33:36,685 p=117763 u=root n=ansible | changed: [WEB]
+2022-02-10 02:33:36,690 p=117763 u=root n=ansible | TASK [Re read the package] *********************************************************
+2022-02-10 02:33:37,084 p=117763 u=root n=ansible | changed: [WEB]
+2022-02-10 02:33:37,089 p=117763 u=root n=ansible | TASK [Start the Web application] ***************************************************
+2022-02-10 02:33:37,457 p=117763 u=root n=ansible | changed: [WEB]
+2022-02-10 02:33:37,458 p=117763 u=root n=ansible | PLAY RECAP *************************************************************************
+2022-02-10 02:33:37,459 p=117763 u=root n=ansible | WEB                        : ok=10   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2022-02-10 02:54:03,666 p=118241 u=root n=ansible | PLAY [trigger_DB] ******************************************************************
+2022-02-10 02:54:03,675 p=118241 u=root n=ansible | TASK [Gathering Facts] *************************************************************
+2022-02-10 02:54:05,482 p=118241 u=root n=ansible | ok: [DB]
+2022-02-10 02:54:05,487 p=118241 u=root n=ansible | TASK [Installing Mysql  and dependencies] ******************************************
+2022-02-10 02:54:12,209 p=118241 u=root n=ansible | changed: [DB] => (item=python3-setuptools)
+2022-02-10 02:54:35,129 p=118241 u=root n=ansible | changed: [DB] => (item=python3-pip)
+2022-02-10 02:54:37,228 p=118241 u=root n=ansible | changed: [DB] => (item=python3-pymysql)
+2022-02-10 02:54:39,666 p=118241 u=root n=ansible | changed: [DB] => (item=python3-mysqldb)
+2022-02-10 02:55:01,990 p=118241 u=root n=ansible | changed: [DB] => (item=mysql-server)
+2022-02-10 02:55:03,958 p=118241 u=root n=ansible | changed: [DB] => (item=mysql-client)
+2022-02-10 02:55:06,437 p=118241 u=root n=ansible | changed: [DB] => (item=default-libmysqlclient-dev)
+2022-02-10 02:55:06,452 p=118241 u=root n=ansible | TASK [Check if this old version is absent PyMySQL] *********************************
+2022-02-10 02:55:07,850 p=118241 u=root n=ansible | ok: [DB]
+2022-02-10 02:55:07,855 p=118241 u=root n=ansible | TASK [Enable remote login to mysql] ************************************************
+2022-02-10 02:55:08,266 p=118241 u=root n=ansible | changed: [DB]
+2022-02-10 02:55:08,270 p=118241 u=root n=ansible | TASK [Change the authentication plugin of MySQL root user to mysql_native_password] ***
+2022-02-10 02:55:08,651 p=118241 u=root n=ansible | changed: [DB]
+2022-02-10 02:55:08,657 p=118241 u=root n=ansible | TASK [Flush Privileges] ************************************************************
+2022-02-10 02:55:08,921 p=118241 u=root n=ansible | changed: [DB]
+2022-02-10 02:55:08,926 p=118241 u=root n=ansible | TASK [Create user with password, all database privileges and 'WITH GRANT OPTION'] ***
+2022-02-10 02:55:09,360 p=118241 u=root n=ansible | changed: [DB]
+2022-02-10 02:55:09,366 p=118241 u=root n=ansible | TASK [Flush Privileges] ************************************************************
+2022-02-10 02:55:09,628 p=118241 u=root n=ansible | changed: [DB]
+2022-02-10 02:55:09,633 p=118241 u=root n=ansible | TASK [Restart mysql] ***************************************************************
+2022-02-10 02:55:14,230 p=118241 u=root n=ansible | changed: [DB]
+2022-02-10 02:55:14,235 p=118241 u=root n=ansible | TASK [Create DB] *******************************************************************
+2022-02-10 02:55:14,629 p=118241 u=root n=ansible | changed: [DB]
+2022-02-10 02:55:14,630 p=118241 u=root n=ansible | RUNNING HANDLER [Restart mysql] ****************************************************
+2022-02-10 02:55:18,837 p=118241 u=root n=ansible | changed: [DB]
+2022-02-10 02:55:18,839 p=118241 u=root n=ansible | PLAY RECAP *************************************************************************
+2022-02-10 02:55:18,839 p=118241 u=root n=ansible | DB                         : ok=11   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2022-02-10 02:57:36,479 p=118527 u=root n=ansible | PLAY [trigger_WEB] *****************************************************************
+2022-02-10 02:57:36,488 p=118527 u=root n=ansible | TASK [Gathering Facts] *************************************************************
+2022-02-10 02:57:38,607 p=118527 u=root n=ansible | ok: [WEB]
+2022-02-10 02:57:38,611 p=118527 u=root n=ansible | TASK [Installing  packages and dependencies] ***************************************
+2022-02-10 02:57:47,582 p=118527 u=root n=ansible | changed: [WEB] => (item=python3-setuptools)
+2022-02-10 02:58:07,934 p=118527 u=root n=ansible | changed: [WEB] => (item=python3-pip)
+2022-02-10 02:58:09,944 p=118527 u=root n=ansible | changed: [WEB] => (item=python3-mysqldb)
+2022-02-10 02:58:31,116 p=118527 u=root n=ansible | changed: [WEB] => (item=mysql-server)
+2022-02-10 02:58:32,775 p=118527 u=root n=ansible | changed: [WEB] => (item=mysql-client)
+2022-02-10 02:58:34,852 p=118527 u=root n=ansible | changed: [WEB] => (item=default-libmysqlclient-dev)
+2022-02-10 02:58:37,540 p=118527 u=root n=ansible | changed: [WEB] => (item=supervisor)
+2022-02-10 02:58:40,673 p=118527 u=root n=ansible | changed: [WEB] => (item=git)
+2022-02-10 02:58:40,691 p=118527 u=root n=ansible | TASK [Install Packages related to WEB] *********************************************
+2022-02-10 02:58:47,604 p=118527 u=root n=ansible | changed: [WEB]
+2022-02-10 02:58:47,609 p=118527 u=root n=ansible | TASK [Download the code from the GitRepo] ******************************************
+2022-02-10 02:58:49,123 p=118527 u=root n=ansible | changed: [WEB]
+2022-02-10 02:58:49,128 p=118527 u=root n=ansible | TASK [Enable DB] *******************************************************************
+2022-02-10 02:58:49,465 p=118527 u=root n=ansible | changed: [WEB]
+2022-02-10 02:58:49,470 p=118527 u=root n=ansible | TASK [Make DB tables] **************************************************************
+2022-02-10 02:58:50,167 p=118527 u=root n=ansible | changed: [WEB]
+2022-02-10 02:58:50,172 p=118527 u=root n=ansible | TASK [Align DB with Web application] ***********************************************
+2022-02-10 02:58:51,464 p=118527 u=root n=ansible | changed: [WEB]
+2022-02-10 02:58:51,469 p=118527 u=root n=ansible | TASK [Creating a config file] ******************************************************
+2022-02-10 02:58:52,094 p=118527 u=root n=ansible | changed: [WEB]
+2022-02-10 02:58:52,099 p=118527 u=root n=ansible | TASK [Re read the package] *********************************************************
+2022-02-10 02:58:52,478 p=118527 u=root n=ansible | changed: [WEB]
+2022-02-10 02:58:52,483 p=118527 u=root n=ansible | TASK [Start the Web application] ***************************************************
+2022-02-10 02:58:52,857 p=118527 u=root n=ansible | changed: [WEB]
+2022-02-10 02:58:52,859 p=118527 u=root n=ansible | PLAY RECAP *************************************************************************
+2022-02-10 02:58:52,859 p=118527 u=root n=ansible | WEB                        : ok=10   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

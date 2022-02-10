@@ -1,0 +1,74 @@
+# Authored by - Nitin Nahal
+
+---
+- name: "trigger_DB"
+  hosts: all
+  serial: 1
+  ignore_errors: no
+  become: yes
+
+  tasks:
+
+    - name: Installing Mysql  and dependencies
+      package:
+        name: "{{item}}"
+        state: latest
+        update_cache: yes
+      loop:
+        - python3-setuptools
+        - python3-pip
+        - python3-pymysql
+        - python3-mysqldb
+        - mysql-server
+        - mysql-client 
+        - default-libmysqlclient-dev
+      become: yes
+      
+    - name: Check if this old version is absent PyMySQL
+      pip:
+        name: PyMySQL
+        state: absent
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+
+    - name: Enable remote login to mysql
+      lineinfile:
+        path: "/etc/mysql/mariadb.conf.d/50-server.cnf"
+        regexp: "^bind-address"
+        line: "bind-address = 0.0.0.0"
+        backup: yes
+      notify:
+        - Restart mysql
+
+    - name: Change the authentication plugin of MySQL root user to mysql_native_password
+      shell: mysql -u root -e 'UPDATE mysql.user SET plugin="mysql_native_password" WHERE user="root" AND host="localhost"'
+    - name: Flush Privileges
+      shell: mysql -u root -e 'FLUSH PRIVILEGES'
+
+    - name: Create user with password, all database privileges and 'WITH GRANT OPTION'
+      community.mysql.mysql_user:
+        state: present
+        host: '%'
+        name: django
+        password: django
+        priv:
+          'ionos_proj.*': 'ALL,GRANT'
+
+    - name: Flush Privileges
+      shell: mysql -u root -e 'FLUSH PRIVILEGES'
+
+    - name: Restart mysql
+      service:
+        name: mariadb
+        state: restarted
+
+    - name: Create DB
+      mysql_db:
+        name: "ionos_proj"
+        state: present
+
+  handlers:
+    - name: Restart mysql
+      service:
+        name: mariadb
+        state: restarted

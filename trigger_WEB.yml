@@ -1,0 +1,77 @@
+# Authored by - Nitin Nahal
+
+---
+
+- name: "trigger_WEB"
+  hosts: all
+  serial: 1
+  ignore_errors: no
+  become: yes
+
+  tasks:
+
+    - name: Installing  packages and dependencies
+      package:
+        name: "{{item}}"
+        state: latest
+        update_cache: yes
+      loop:
+        - python3-setuptools
+        - python3-pip
+        - python3-mysqldb
+        - mysql-server
+        - mysql-client 
+        - default-libmysqlclient-dev
+        - supervisor
+        - git
+      become: yes
+      
+    - name: Install Packages related to WEB
+      pip:
+        name: 
+          - django
+          - mysqlclient>1.3.13
+          - gunicorn
+        state: present
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+
+    - name: Download the code from the GitRepo
+      become: yes
+      git:
+        repo: 'https://github.com/NitinNahal/ionos_assignment.git'
+        version: 'feature/task_2'
+        dest: "/root/task_2"
+        force: yes
+
+    - name: Enable DB
+      lineinfile:
+        path: "/root/task_2/ionos_proj/settings.py"
+        regexp: "'HOST':"
+        line: "{{'\"HOST\": \"' + hostvars['DB']['ansible_host'] +'\",'}}"
+
+    - name: Make DB tables
+      shell: "python3 /root/task_2/manage.py makemigrations"
+
+    - name: Align DB with Web application
+      shell: "python3 /root/task_2/manage.py migrate"
+
+    - name: Creating a config file
+      copy:
+        dest: "/etc/supervisor/conf.d/ionos_proj_gunicorn.conf"
+        content: |
+          [program:ionos_proj_gunicorn]
+          user=root
+          directory=/root/task_2/
+          command=gunicorn -b 0.0.0.0:8080 --workers=5 ionos_proj.wsgi
+           
+          autostart=true
+          autorestart=true
+          stdout_logfile=/root/task_2/gunicorn.log
+          stderr_logfile=/root/task_2/gunicorn.err.log
+
+    - name: Re read the package
+      shell: "supervisorctl reread"
+
+    - name: Start the Web application
+      shell: "supervisorctl update"      
