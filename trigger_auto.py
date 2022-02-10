@@ -119,6 +119,7 @@ try:
     response_user = input("Process Complete ! Once you verify above please press y/Y to continue to delete this datacenter : ")
     if response_user == 'y' or response_user == 'Y':
         api_rep.deleteDataCenter(dataCenterId)
+        print("Waiting for cleanup ....")
         sleep(80)
         print("Process complete. Thanks for running this automation")
     else:
